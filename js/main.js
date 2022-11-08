@@ -37,7 +37,7 @@ const kittenData_3 = {
     race: "British Shorthair",
 };
 
-const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
+let kittenDataList = [];
 
 //Funciones
 function renderKitten(kittenData) {
@@ -157,11 +157,27 @@ searchButton.addEventListener("click", filterKitten);
 buttonAdd.addEventListener("click", addNewKitten);
 buttonCancelForm.addEventListener("click", cancelNewKitten);
 
+/////////2.13. Peticiones al servidor.
+//Obtener listado de gatitos desde el servidor
 
+const GITHUB_USER = '<Aliripoll>';
+const SERVER_URL = `https://dev.adalab.es/api/kittens/${GITHUB_USER}`;
 
-
-
-
+fetch(SERVER_URL, {
+    method: 'GET',
+    headers: {'Content-Type': 'application/json'},
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    kittenDataList = data.results;
+    renderKittenList(kittenDataList);
+  });
+  
+  
+  
+  
+  
+  
 
 
 
